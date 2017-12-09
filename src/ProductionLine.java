@@ -3,9 +3,9 @@ import java.util.Queue;
 
 public class ProductionLine {
 
-	Queue<Disk> inputQueue;
-	Queue<Tower> outputQueue;
-	Tower 
+	private Queue<Disk> inputQueue;
+	private Queue<Tower> outputQueue;
+	private Tower robotTower;
 	
 	/**
 	 * 
@@ -17,6 +17,7 @@ public class ProductionLine {
 	public ProductionLine() {
 		inputQueue  = new LinkedList<Disk>();
 		outputQueue  = new LinkedList<Tower>();
+		robotTower = new Tower();
 	}
 	
 	/**
@@ -41,7 +42,12 @@ public class ProductionLine {
 	 */
 	public void unloadRobot () {
 	
-		
+		Tower outputTower = new Tower();
+		while (robotTower.top() != null) {
+			Disk d = robotTower.removeDisk();
+			outputTower.addDisk(d);
+		}
+		outputQueue.add(outputTower);
 		
 	}
 	
@@ -51,8 +57,21 @@ public class ProductionLine {
 	 * @date - Dec 7, 2017
 	 */
 	public void process() {
-		
-		
+		if (inputQueue.isEmpty()) {
+			unloadRobot();
+			return;
+		}
+		Disk d = inputQueue.remove();
+		if (robotTower.getDisks().empty()) {
+			robotTower.addDisk(d);
+			return;
+		}
+		Disk a = robotTower.top();
+		if (a.compareTo(d) < 0)
+			robotTower.addDisk(d);
+		else
+			unloadRobot();
+			
 	}
 	
 	/**
@@ -66,5 +85,15 @@ public class ProductionLine {
 		Tower t = outputQueue.remove();
 		return t;
 	}
+	
+	public Queue getInput() {
+		return inputQueue;
+	}
+	
+	public Queue getOutput() {
+		return outputQueue;
+	}
+	
+	
 	
 }
