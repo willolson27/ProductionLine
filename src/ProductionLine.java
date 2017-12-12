@@ -86,11 +86,11 @@ public class ProductionLine {
 		return t;
 	}
 	
-	public Queue getInput() {
+	public Queue<Disk> getInput() {
 		return inputQueue;
 	}
 	
-	public Queue getOutput() {
+	public Queue<Tower> getOutput() {
 		return outputQueue;
 	}
 	

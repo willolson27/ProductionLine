@@ -27,7 +27,17 @@ public class Tower {
 	}
 	
 	public Disk top() {
-		return disks.peek();
+		if (disks.isEmpty() == false)
+			return disks.peek();
+		return null;
+	}
+	
+	public String toString() {
+		Stack<Disk> copy = disks;
+		String toOutput = "";
+		while (copy.isEmpty() == false)
+				toOutput += copy.pop() + "\t";
+		return toOutput;
 	}
 	
 }

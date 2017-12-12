@@ -3,7 +3,9 @@ import java.util.Queue;
 
 public class ProductionLineTest {
 
-	public void go() {
+	public static void go() {
+		
+		
 		
 		ProductionLine p = new ProductionLine();
 		
@@ -17,21 +19,29 @@ public class ProductionLineTest {
 		p.addDisk(d4);
 		
 		
-		while (p.getInput() != null) {
+		while (p.getInput().isEmpty() == false) {
 			p.process();
 			
 		}
 		
+		Queue<Tower> output = p.getOutput();
 		
-			
+		while(output.isEmpty() == false)
+			SOP(output.remove() + "");
 		
+		System.out.println("done");
+	 
 	}
 	
 	
 	public static void main (String [] args) {
 		
+		go();
 		
-		
+	}
+	
+	public static void SOP (String s) {
+		System.out.println(s);
 	}
 	
 }

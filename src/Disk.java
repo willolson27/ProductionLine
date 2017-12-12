@@ -1,5 +1,5 @@
 
-public class Disk implements Comparable<T> {
+public class Disk implements Comparable {
 
 	private int radius;
 	
@@ -18,7 +18,6 @@ public class Disk implements Comparable<T> {
 	 * @param otherD - other disk to be compared t o
 	 * @return - integer difference between this radius and another radius
 	 */
-	@Override
 	public int compareTo(Disk otherD) {
 		return (this.getRadius() - otherD.getRadius());
 	}
@@ -31,8 +30,18 @@ public class Disk implements Comparable<T> {
 		return radius;
 	}
 
+	@Override
+	public int compareTo(Object arg0) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
+	public String toString() {
+		return radius + "";
 	}
 
-
+	
 }
+
+
+
