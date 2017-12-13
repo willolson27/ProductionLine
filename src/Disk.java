@@ -37,7 +37,10 @@ public class Disk implements Comparable {
 	}
 	
 	public String toString() {
-		return radius + "";
+		String toOutput = "";
+		for (int i = 0; i < radius; i++)
+			toOutput += "*";
+		return toOutput;
 	}
 
 	

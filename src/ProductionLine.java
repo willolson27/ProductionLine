@@ -7,6 +7,8 @@ public class ProductionLine {
 	private Queue<Tower> outputQueue;
 	private Tower robotTower;
 	
+	private int i = 0;
+	
 	/**
 	 * 
 	 * @username - willolson27
@@ -38,15 +40,16 @@ public class ProductionLine {
 	 * 
 	 * @username - willolson27
 	 * @date - Dec 7, 2017
-	 * 
+	 * @method - unloadRobot
 	 */
 	public void unloadRobot () {
-	
+		
 		Tower outputTower = new Tower();
 		while (robotTower.top() != null) {
-			Disk d = robotTower.removeDisk();
-			outputTower.addDisk(d);
+			Disk d = robotTower.pop();
+			outputTower.push(d);
 		}
+	//	outputTower.flip();
 		outputQueue.add(outputTower);
 		
 	}
@@ -55,23 +58,26 @@ public class ProductionLine {
 	 * 
 	 * @username - willolson27
 	 * @date - Dec 7, 2017
+	 * @method - process
+	 * 		-takes the next value in the inputQueue and processes whether it should be placed on the robot or
+	 * 		if the robot should be unloaded
 	 */
 	public void process() {
-		if (inputQueue.isEmpty()) {
-			unloadRobot();
-			return;
+		while (!inputQueue.isEmpty()) {
+			Disk d = inputQueue.peek();
+			if (robotTower.isEmpty()) {
+				d = inputQueue.remove();
+				robotTower.push(d);
+				i++;
+			}
+			else if (robotTower.top().compareTo(d) < 0) {
+				d = inputQueue.remove();
+				robotTower.push(d);
+			}
+			else
+				unloadRobot();	
 		}
-		Disk d = inputQueue.remove();
-		if (robotTower.getDisks().empty()) {
-			robotTower.addDisk(d);
-			return;
-		}
-		Disk a = robotTower.top();
-		if (a.compareTo(d) < 0)
-			robotTower.addDisk(d);
-		else
-			unloadRobot();
-			
+		unloadRobot();
 	}
 	
 	/**
