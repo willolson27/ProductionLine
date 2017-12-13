@@ -1,6 +1,8 @@
 
 public class Disk implements Comparable {
 
+	private final String EMPTY_DISK = "Disk has zero length";
+	
 	private int radius;
 	
 	/**
@@ -38,6 +40,8 @@ public class Disk implements Comparable {
 	
 	public String toString() {
 		String toOutput = "";
+		if (radius == 0)
+			return EMPTY_DISK;
 		for (int i = 0; i < radius; i++)
 			toOutput += "*";
 		return toOutput;

@@ -7,7 +7,14 @@ public class ProductionLineTest {
 	private final static String INPUT = "Input disks";
 	private final static String OUTPUT = "output towers";
 	
-	
+	/**
+	 * 
+	 * @user willolson27
+	 * @date December 12, 2017
+	 * @method printQueue
+	 *
+	 * @param q
+	 */
 	public static void printQueue (Queue<Disk> q) {
 		
 		
@@ -24,26 +31,19 @@ public class ProductionLineTest {
 		}
 	}
 	
+	/**
+	 * 
+	 */
 	public static void go() {
 		
 		
 		
 		ProductionLine p = new ProductionLine();
 		
-		Disk d = new Disk(4);
-		Disk d2 = new Disk(2);
-		Disk d3 = new Disk(6);
-		Disk d4 = new Disk(1);
-		Disk d5 = new Disk(5);
-		Disk d6 = new Disk(3);
-		Disk d7 = new Disk(9);
-		p.addDisk(d);
-		p.addDisk(d2);
-		p.addDisk(d3);
-		p.addDisk(d4);
-		p.addDisk(d5);
-		p.addDisk(d6);
-		p.addDisk(d7);
+		int[] nums = {1,7,3,9,11,12,4,4,4,4,4,4,3,5,1,2,2,22,4465};
+		
+		for (int a : nums)
+			p.addDisk(new Disk(a));
 		
 		//Print out the input queue
 		

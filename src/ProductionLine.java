@@ -70,7 +70,7 @@ public class ProductionLine {
 				robotTower.push(d);
 				i++;
 			}
-			else if (robotTower.top().compareTo(d) < 0) {
+			else if (robotTower.top().compareTo(d) <= 0) {
 				d = inputQueue.remove();
 				robotTower.push(d);
 			}
