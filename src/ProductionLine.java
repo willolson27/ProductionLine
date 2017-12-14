@@ -3,11 +3,11 @@ import java.util.Queue;
 
 public class ProductionLine {
 
+	//Create fields
 	private Queue<Disk> inputQueue;
 	private Queue<Tower> outputQueue;
 	private Tower robotTower;
 	
-	private int i = 0;
 	
 	/**
 	 * 
@@ -17,6 +17,7 @@ public class ProductionLine {
 	 * 		-creates a new ProductionLine object with a new inputQueue and new outputQueue
 	 */
 	public ProductionLine() {
+		
 		inputQueue  = new LinkedList<Disk>();
 		outputQueue  = new LinkedList<Tower>();
 		robotTower = new Tower();
@@ -40,18 +41,18 @@ public class ProductionLine {
 	 * 
 	 * @username - willolson27
 	 * @date - Dec 7, 2017
-	 * @method - unloadRobot
+	 * @method - unloadRobot - unloads the robot stack and puts it onto the output queue 
 	 */
 	public void unloadRobot () {
 		
-		Tower outputTower = new Tower();
-		while (robotTower.top() != null) {
-			Disk d = robotTower.pop();
-			outputTower.push(d);
-		}
-	//	outputTower.flip();
+		//Create an outputTower from what is on the robot and put it in the outputQueue
+		Tower outputTower = (Tower) robotTower.clone();
+		outputTower.flip();
 		outputQueue.add(outputTower);
 		
+		//Unload the robot
+		robotTower.clear();
+	
 	}
 	
 	/**
@@ -59,21 +60,23 @@ public class ProductionLine {
 	 * @username - willolson27
 	 * @date - Dec 7, 2017
 	 * @method - process
-	 * 		-takes the next value in the inputQueue and processes whether it should be placed on the robot or
-	 * 		if the robot should be unloaded
+	 * 		-runs through the input queue and processes each disk, deciding whether to put the disk on the robot 
+	 * 		or to empty the robot 
+	 * 
 	 */
 	public void process() {
 		while (!inputQueue.isEmpty()) {
 			Disk d = inputQueue.peek();
+			//Add to tower if it is empty
 			if (robotTower.isEmpty()) {
 				d = inputQueue.remove();
 				robotTower.push(d);
-				i++;
 			}
+			//Add to tower if current disk is bigger than the one on the tower
 			else if (robotTower.top().compareTo(d) <= 0) {
-				d = inputQueue.remove();
 				robotTower.push(d);
 			}
+			//unload the robot if the current disk is smaller than the one on the tower
 			else
 				unloadRobot();	
 		}
@@ -84,7 +87,9 @@ public class ProductionLine {
 	 * 
 	 * @username - willolson27
 	 * @date - Dec 7, 2017
-	 * @return - 
+	 * @method - removeTower
+	 * 		-removes a tower from the outputQueue
+	 * @return - Tower removed from the outputQueue
 	 */
 	public Tower removeTower() {
 		
@@ -92,10 +97,26 @@ public class ProductionLine {
 		return t;
 	}
 	
+	/**
+	 * 
+	 * @user willolson27
+	 * @date December 12, 2017
+	 * @method getInput
+	 * 		-returns the inputQueue
+	 * @return this ProductionLine's inputQueue
+	 */
 	public Queue<Disk> getInput() {
 		return inputQueue;
 	}
 	
+	/**
+	 * 
+	 * @user willolson27
+	 * @date December 12, 2017
+	 * @method getOutput
+	 * 		-returns the outputQueue 
+	 * @return this ProductionLine's outputQueue
+	 */
 	public Queue<Tower> getOutput() {
 		return outputQueue;
 	}
