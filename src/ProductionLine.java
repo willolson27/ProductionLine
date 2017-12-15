@@ -1,6 +1,11 @@
 import java.util.LinkedList;
 import java.util.Queue;
-
+/**
+ * 
+ * @author willolson27
+ * Date Due -  December 14, 2017
+ *
+ */
 public class ProductionLine {
 
 	//Create fields
@@ -10,11 +15,9 @@ public class ProductionLine {
 	
 	
 	/**
+	 * creates a new ProductionLine object with a new inputQueue and new outputQueue
+	 * @return new ProductionLine object
 	 * 
-	 * @username - willolson27
-	 * @date - Dec 7, 2017
-	 * @method - ProductionLine
-	 * 		-creates a new ProductionLine object with a new inputQueue and new outputQueue
 	 */
 	public ProductionLine() {
 		
@@ -24,12 +27,9 @@ public class ProductionLine {
 	}
 	
 	/**
-	 * 
-	 * @username - willolson27
-	 * @date - Dec 7, 2017
-	 * @method - addDisk
-	 * 		-adds a given Disk to the input queue
+	 * adds a given Disk to the input queue
 	 * @param d - disk to be added
+	 * 
 	 */
 	public void addDisk(Disk d) {
 		
@@ -38,10 +38,8 @@ public class ProductionLine {
 	}
 	
 	/**
+	 * unloads the robot stack and puts it onto the output queue 
 	 * 
-	 * @username - willolson27
-	 * @date - Dec 7, 2017
-	 * @method - unloadRobot - unloads the robot stack and puts it onto the output queue 
 	 */
 	public void unloadRobot () {
 		
@@ -56,15 +54,11 @@ public class ProductionLine {
 	}
 	
 	/**
-	 * 
-	 * @username - willolson27
-	 * @date - Dec 7, 2017
-	 * @method - process
-	 * 		-runs through the input queue and processes each disk, deciding whether to put the disk on the robot 
-	 * 		or to empty the robot 
+	 * runs through the input queue and processes each disk, deciding whether to put the disk on the robot or to empty the robot 
 	 * 
 	 */
 	public void process() {
+		
 		while (!inputQueue.isEmpty()) {
 			Disk d = inputQueue.peek();
 			//Add to tower if it is empty
@@ -74,6 +68,7 @@ public class ProductionLine {
 			}
 			//Add to tower if current disk is bigger than the one on the tower
 			else if (robotTower.top().compareTo(d) <= 0) {
+				d = inputQueue.remove();
 				robotTower.push(d);
 			}
 			//unload the robot if the current disk is smaller than the one on the tower
@@ -84,12 +79,9 @@ public class ProductionLine {
 	}
 	
 	/**
-	 * 
-	 * @username - willolson27
-	 * @date - Dec 7, 2017
-	 * @method - removeTower
-	 * 		-removes a tower from the outputQueue
+	 * removes a tower from the outputQueue
 	 * @return - Tower removed from the outputQueue
+	 * 
 	 */
 	public Tower removeTower() {
 		
@@ -98,24 +90,20 @@ public class ProductionLine {
 	}
 	
 	/**
-	 * 
-	 * @user willolson27
-	 * @date December 12, 2017
-	 * @method getInput
-	 * 		-returns the inputQueue
+	 * returns the inputQueue
 	 * @return this ProductionLine's inputQueue
+	 * 
 	 */
 	public Queue<Disk> getInput() {
+		
 		return inputQueue;
+	
 	}
 	
 	/**
-	 * 
-	 * @user willolson27
-	 * @date December 12, 2017
-	 * @method getOutput
-	 * 		-returns the outputQueue 
+	 * returns the outputQueue 
 	 * @return this ProductionLine's outputQueue
+	 * 
 	 */
 	public Queue<Tower> getOutput() {
 		return outputQueue;

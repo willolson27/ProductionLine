@@ -2,27 +2,28 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
+/**
+ * 
+ * @author willolson27
+ * Date Due -  December 14, 2017
+ *
+ */
+
 public class Tower extends Stack<Disk>{
 
 	
 	/**
+	 * creates a new tower with no disks
 	 * 
-	 * @user willolson27
-	 * @date December 12, 2017
-	 * @method Tower
-	 * 	- creates a new tower with no disks
 	 */
 	public Tower() {
 		
 	}
 	
 	/**
-	 * 
-	 * @user willolson27
-	 * @date December 12, 2017
-	 * @method top
-	 * 		-used to get the top value of the Tower, implemented to avoid errors
+	 * used to get the top value of the Tower, implemented to avoid errors
 	 * @return Disk located at top
+	 * 
 	 */
 	public Disk top() {
 		if (this.isEmpty() == false)
@@ -31,11 +32,9 @@ public class Tower extends Stack<Disk>{
 	}
 	
 	/**
+	 * flips over this Tower
 	 * 
-	 * @user willolson27
-	 * @date December 12, 2017
-	 * @method flip
-	 * 		-flips over this Tower
+	 * 
 	 */
 	public void flip() {
 		
@@ -54,12 +53,9 @@ public class Tower extends Stack<Disk>{
 	}
 	
 	/**
-	 * 
-	 * @user willolson27
-	 * @date December 12, 2017
-	 * @method toString
-	 * 		-returns a representation of this Tower in lines of asterisks
+	 * returns a representation of this Tower in lines of asterisks
 	 * @return String representation of this Tower
+	 * 
 	 */
 	public String toString() {
 		Tower copy = new Tower();

@@ -3,7 +3,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Scanner;
 import java.util.Stack;
+
+/**
+ * 
+ * @author willolson27
+ * Date Due -  December 14, 2017
+ */
 
 public class ProductionLineTest {
 
@@ -18,14 +25,11 @@ public class ProductionLineTest {
 
 	
 	/**
-	 * 
-	 * @user willolson27
-	 * @date December 12, 2017
-	 * @method printQueue
-	 *		-takes in a queue, reverses it, and returns a String of its concatenated values
+	 * takes in a queue, reverses it, and returns a String of its concatenated values
 	 *		-the queue needs to be revered because it is processed in a FIFO order, but the representation
 	 *		 of the class needs to last value in the queue to be printed first
 	 * @param q - queue to be reversed to a string
+	 * 
 	 */
 	public static String printQueue (Queue<Disk> q) {
 		
@@ -51,21 +55,18 @@ public class ProductionLineTest {
 	}
 	
 	/**
-	 * 
-	 * @user willolson27
-	 * @date December 12, 2017
-	 * @method go 
-	 * 		-tests the class ProductionLine
+	 * tests the class ProductionLine
 	 * @throws IOException 
 	 * 
 	 */
-	public static void go() throws IOException {
+	public static void go(int[] nums) throws IOException {
+		
 		
 		
 		//Create local fields
 		ProductionLine p = new ProductionLine();
 		PrintWriter out = new PrintWriter(new FileWriter(OUTPUT_TXT));
-		int[] nums = {1,7,3,9,11,12,4,4,4,4,4,4,3,5,1,2,2,22,59};
+		
 		
 		//add disks to a productionLine
 		for (int a : nums)
@@ -79,32 +80,40 @@ public class ProductionLineTest {
 		//Run through and process every disk in the ProductionLine
 		p.process();
 			
+		
 		//Print the output results
 		out.println("\n" + OUTPUT);
-		Queue<Tower> output = p.getOutput();
+		Queue<Tower> output = new LinkedList<Tower>();
+		
+		while(p.getOutput().isEmpty() == false)
+			output.add(p.removeTower());
 		while(output.isEmpty() == false)
 			out.println(output.remove() + "");
 		
 		
 		//Finish
-		out.println("done");
+		SOP("done");
 		out.close();
 		
 	}
 	
 	/**
-	 * 
-	 * @user willolson27
-	 * @date December 12, 2017
-	 * @method - main
-	 * 		-calls any methods needed to test ProductionLine
+	 * calls any methods needed to test ProductionLine
 	 * @param args - given arguments for the project
+	 * 
 	 */
 	public static void main (String [] args) {
+	
+		int[] nums = {100,7,3,9,2,2,3,4,5,6,7,5,57,4,3};
+		int[] nums2 = {};
+		int[] nums3 = {1,1,3,4,56,666,788,99999, 1, 5, 6 ,4 ,87, 2,3, 6,5,4,3,34,5,7,5,3};
+		
+		int[][] numSets = {nums, nums2, nums3};
 		
 	//run modular test class	
 		try {
-			go();
+			for (int[] a : numSets)
+				go(a);
 		} catch (IOException e) {
 			SOP(FILE_ERROR);
 		} 
@@ -112,23 +121,17 @@ public class ProductionLineTest {
 	}
 	
 	/**
-	 * 
-	 * @user willolson27
-	 * @date December 12, 2017
-	 * @method - SOP
-	 * 		-takes in a given String and prints it to the console to save repetitive code
+	 * takes in a given String and prints it to the console to save repetitive code
 	 * @param s - String value to be printed
+	 * 
 	 */
 	public static void SOP (String s) {
 		System.out.println(s);
 	}
 	
 	/**
-	 * 
-	 * @user willolson27
-	 * @date December 12, 2017
-	 * @method testExtras
-	 * 		-used to test certain methods to get them working, used so far for: flip()
+	 * used to test certain methods to get them working
+	 *
 	 */
 	public static void testExtras() {
 		
