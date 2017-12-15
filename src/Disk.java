@@ -7,7 +7,7 @@
 
 public class Disk implements Comparable {
 
-	private final String EMPTY_DISK = "Disk has zero length";
+	private final String EMPTY_DISK = "0";
 	
 	private int radius;
 	

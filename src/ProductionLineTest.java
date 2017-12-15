@@ -21,7 +21,9 @@ public class ProductionLineTest {
 	private final static String OUTPUT = "output towers";
 	private final static String OUTPUT_TXT = "output.txt";
 	private final static String FILE_ERROR = "ERROR: no output file found";
-	
+	private final static String DONE = "done";
+	private final static String ASK = "enter a bunch of disk lengths";
+	private final static String EMPTY_ERROR = "no input found";
 
 	
 	/**
@@ -73,7 +75,7 @@ public class ProductionLineTest {
 			p.addDisk(new Disk(a));
 		
 		//Print out the input queue		
-		out.println(INPUT);
+		out.println(INPUT + "\n");
 		Queue<Disk> inputCopy = new LinkedList<Disk>(p.getInput());
 		out.println(printQueue(inputCopy));
 		
@@ -82,7 +84,7 @@ public class ProductionLineTest {
 			
 		
 		//Print the output results
-		out.println("\n" + OUTPUT);
+		out.println("\n" + OUTPUT + "\n");
 		Queue<Tower> output = new LinkedList<Tower>();
 		
 		while(p.getOutput().isEmpty() == false)
@@ -92,7 +94,7 @@ public class ProductionLineTest {
 		
 		
 		//Finish
-		SOP("done");
+		SOP(DONE);
 		out.close();
 		
 	}
@@ -104,16 +106,30 @@ public class ProductionLineTest {
 	 */
 	public static void main (String [] args) {
 	
-		int[] nums = {100,7,3,9,2,2,3,4,5,6,7,5,57,4,3};
-		int[] nums2 = {};
-		int[] nums3 = {1,1,3,4,56,666,788,99999, 1, 5, 6 ,4 ,87, 2,3, 6,5,4,3,34,5,7,5,3};
 		
-		int[][] numSets = {nums, nums2, nums3};
+		
+		
+		Scanner input = new Scanner(System.in);
+		SOP(ASK);
+		
+		String s = input.nextLine();
+		input.close();
+		String [] arr = s.split("\\W+");
+		int[] nums = new int[arr.length];
+		for (int i = 0; i < arr.length; i++) {
+		 if (!arr[i].equals(""))	
+			nums[i] = Integer.parseInt(arr[i]);
+		 else {
+			 SOP(EMPTY_ERROR);
+			 System.exit(0);
+		 }
+		}
+
+		
 		
 	//run modular test class	
 		try {
-			for (int[] a : numSets)
-				go(a);
+			go(nums);
 		} catch (IOException e) {
 			SOP(FILE_ERROR);
 		} 
